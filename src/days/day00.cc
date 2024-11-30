@@ -17,21 +17,13 @@ int main() {
 
   for (const auto &line : lines) { // simple part 1
     // auto fr = line.find_first_of("01234567890");
-    const auto fv = *std::find_if(line.begin(), line.end(),
-                                  [](char c) { return std::isdigit(c); });
-
-    const auto lv = *std::find_if(line.rbegin(), line.rend(),
-                                  [](char c) { return std::isdigit(c); });
-
-    d1_sum += (fv - '0') * 10 + (lv - '0');
-  }
-
-  for (auto line : lines) { // part 2 first identicall to part 1
     const auto fr = std::find_if(line.begin(), line.end(),
                                  [](char c) { return std::isdigit(c); });
 
     const auto lr = std::find_if(line.rbegin(), line.rend(),
                                  [](char c) { return std::isdigit(c); });
+
+    d1_sum += (*fr - '0') * 10 + (*lr - '0');
 
     // index and value of first 'number'
     size_t fi = std::distance(line.begin(), fr);

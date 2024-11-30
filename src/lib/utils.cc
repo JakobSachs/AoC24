@@ -14,7 +14,6 @@ std::ifstream open_input_file_for_day(const std::string &day_file) {
   std::ifstream infile(input_path);
   if (!infile.is_open()) {
     std::cerr << "Failed to open " << input_path << std::endl;
-    // Handle error as per your requirement
   }
   return infile;
 }
@@ -26,6 +25,7 @@ std::vector<std::string> read_lines(const std::string &day) {
   while (std::getline(infile, line)) {
     lines.push_back(line);
   }
+
   return lines;
 }
 

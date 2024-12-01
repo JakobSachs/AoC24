@@ -23,15 +23,17 @@ std::pair<u32, u32> solve() {
   right_ids.reserve(lines.size());
 
   // split each line on first space and parse left & right side to u32
-  std::transform(lines.begin(), lines.end(), std::back_inserter(left_ids),
-                 [&right_ids](const std::string &line) {
-                   auto pos = line.find_first_of(" \t");
-                   right_ids.push_back(std::stoi(line.substr(pos + 1)));
-                   return std::stoi(line.substr(0, pos));
-                 });
+  for (const auto &line : lines) {
+    auto pos = line.find_first_of(" \t");
+    u32 l_val = std::stoi(line.substr(0, pos));
+    u32 r_val = std::stoi(line.substr(pos + 1));
 
-  std::sort(left_ids.begin(), left_ids.end()); // sort inplace
-  std::sort(right_ids.begin(), right_ids.end());
+    auto l_it = std::lower_bound(left_ids.begin(), left_ids.end(), l_val);
+    left_ids.insert(l_it, l_val);
+
+    auto r_it = std::lower_bound(right_ids.begin(), right_ids.end(), r_val);
+    right_ids.insert(r_it, r_val);
+  }
 
   std::vector<u32> distances;
   distances.reserve(lines.size());

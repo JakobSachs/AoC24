@@ -1,6 +1,7 @@
 // src/lib/utils.cc
 #include "utils.h"
 #include <cstring>
+#include <filesystem>
 #include <iostream>
 #include <sstream>
 #include <string>

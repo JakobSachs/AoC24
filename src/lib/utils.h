@@ -1,13 +1,21 @@
 // src/lib/utils.h
 #pragma once
 
+#include <chrono>
 #include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 
-#define AOC24_BENCHMARK_COUNT 1000
+#ifndef __FILE_NAME__
+#include <string.h>
+
+#define __FILE_NAME__                                                          \
+  (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+#endif
+
+#define AOC24_BENCHMARK_COUNT 10000
 #define AOC24_MAIN(DAY)                                                        \
   int main() {                                                                 \
     do {                                                                       \

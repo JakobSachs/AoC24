@@ -9,7 +9,7 @@
 const char digits[][9] = {"one", "two",   "three", "four", "five",
                           "six", "seven", "eight", "nine"};
 
-int main() {
+std::pair<u32, u32> solve() {
   const std::vector<std::string> lines = aoc24::read_lines(__FILE_NAME__);
 
   u32 d1_sum = 0;
@@ -52,7 +52,7 @@ int main() {
     d2_sum += fv * 10 + lv;
   }
 
-  printf("Day 01 output: %d\t%d\n", d1_sum, d2_sum);
-
-  return 0;
+  return std::make_pair(d1_sum, d2_sum);
 }
+
+AOC24_MAIN(__FILE_NAME__);

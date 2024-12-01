@@ -1,11 +1,34 @@
 // src/lib/utils.h
-#ifndef AOC24_UTILS_H
-#define AOC24_UTILS_H
+#pragma once
 
 #include <cstdint>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
+
+#define AOC24_BENCHMARK_COUNT 1000
+#define AOC24_MAIN(DAY)                                                        \
+  int main() {                                                                 \
+    do {                                                                       \
+      auto start = std::chrono::high_resolution_clock::now();                  \
+                                                                               \
+      for (u16 i = 0; i < (AOC24_BENCHMARK_COUNT); i++)                        \
+        solve();                                                               \
+                                                                               \
+      auto end = std::chrono::high_resolution_clock::now();                    \
+      auto duration =                                                          \
+          std::chrono::duration_cast<std::chrono::nanoseconds>(end - start);   \
+                                                                               \
+      const auto res = solve();                                                \
+      printf("= %s output: %d\t%d\n", (DAY), res.first, res.second);           \
+                                                                               \
+      std::cout << "== Execution Time: "                                       \
+                << ((f32)duration.count() / (f32)(AOC24_BENCHMARK_COUNT)) /    \
+                       1000000.0                                               \
+                << " ms\n";                                                    \
+    } while (0);                                                               \
+  }
 
 using u8 = uint8_t;
 using u16 = uint16_t;
@@ -25,5 +48,3 @@ std::ifstream open_input_file_for_day(const std::string &day);
 std::vector<std::string> read_lines(const std::string &day);
 std::string read_file(const std::string &day);
 } // namespace aoc24
-
-#endif // AOC24_UTILS_H
